@@ -49,16 +49,17 @@ class ConvNet:
         return x
 
     def predict_3_char(self, x):
-        for layer in self.layers.values():
-            x = layer.forward(x)
+        x = predict(x)
 
+        # 前後の文字の連続する度合を掛ける 要検証
         if os.path.exists("traindata_code_reliability.npy"):
-            # print("find npy.")
             reli = np.load("traindata_code_reliability.npy")
             for i in range(0, x.shape[0], 3):
                 middle = np.argmax(x[i + 1])
                 x[i] *= reli[0][middle]
                 x[i + 2] *= reli[1][middle]
+        else:
+            print("error: not found file in ConvNet.predict_3_char")
 
         return x
 
@@ -84,7 +85,7 @@ class ConvNet:
         acc = np.sum(acc_list) / x.shape[0]
         for i in range(0, x.shape[0], 3):
             char_3_acc += int(bool(acc_list[i]) & bool(acc_list[i + 1]) & bool(acc_list[i + 2]))
-        char_3_acc /= x.shape[0]
+        char_3_acc *= 3 / x.shape[0]
 
         return acc, char_3_acc
 

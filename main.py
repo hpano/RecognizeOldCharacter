@@ -5,7 +5,7 @@ Make sure the output format.
 """
 
 import numpy as np
-import pandas
+import pandas as pd
 from srcs.utils import AlconDataset, AlconTargets, unicode_to_kana_list, evaluation
 from srcs.myalgorithm import MyAlgorithm
 
