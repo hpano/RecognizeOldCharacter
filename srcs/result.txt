@@ -1,0 +1,3 @@
+max_epochs, num_train, batch_size, train_acc, train_3_acc, test_acc, test_3_acc, train_loss
+30,  1000,  100, 0.909, 0.250, 0.320, 0.027, 0.060
+30,  1200,   30, 0.937, 0.280, 0.343, 0.026, 0.015
