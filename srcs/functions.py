@@ -1,4 +1,5 @@
 import os
+from numba import jit
 import numpy as np
 
 
@@ -47,6 +48,7 @@ def numerical_gradient(f, x):
     return grad
 
 
+# @jit('f8[:,:](f8[:,:,:,:],i8,i8,i8,i8)')
 def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
     """
     Parameters

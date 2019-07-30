@@ -16,7 +16,7 @@ Main Script
 datapath = './dataset/'
 
 # Load dataset
-targets = AlconTargets(datapath, train_ratio=0.995)
+targets = AlconTargets(datapath, train_ratio=0.99)
 traindata = AlconDataset(datapath, targets.train, isTrainVal=True)
 valdata = AlconDataset(datapath, targets.val, isTrainVal=True)
 testdata = AlconDataset(datapath, targets.test, isTrainVal=False)

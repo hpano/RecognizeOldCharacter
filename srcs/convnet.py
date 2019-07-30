@@ -49,9 +49,33 @@ class ConvNet:
         return x
 
     def predict_3_char(self, x):
-        x = predict(x)
+        x = self.predict(x)
 
         # 前後の文字の連続する度合を掛ける 要検証
+        # if os.path.exists("traindata_code_reliability.npy"):
+        #     reli = np.load("traindata_code_reliability.npy")
+        #     for i in range(0, x.shape[0], 3):
+        #         print("bf: [{}, {}, {}]".format(np.argmax(x[i]), np.argmax(x[i + 1]), np.argmax(x[i + 2])))
+        #         max = 0
+        #         for idx in range(i, i + 3):
+        #             for char in range(x.shape[1]):
+        #                 if x[idx][char] > max:
+        #                     max_i = idx
+        #                     max_char = char
+        #         if max_i is None:
+        #             print(x[i])
+        #             print(x[i + 1])
+        #             print(x[i + 2])
+        #         if (max_i % 3) == 0:
+        #             x[i + 1] *= reli[1][max_char]
+        #             x[i + 2] *= reli[1][np.argmax(x[i + 1])]
+        #         elif (max_i % 3) == 1:
+        #             x[i] *= reli[0][max_char]
+        #             x[i + 2] *= reli[1][max_char]
+        #         else:
+        #             x[i + 1] *= reli[0][max_char]
+        #             x[i] *= reli[0][np.argmax(x[i + 1])]
+        #         print("af: [{}, {}, {}]".format(np.argmax(x[i]), np.argmax(x[i + 1]), np.argmax(x[i + 2])))
         if os.path.exists("traindata_code_reliability.npy"):
             reli = np.load("traindata_code_reliability.npy")
             for i in range(0, x.shape[0], 3):

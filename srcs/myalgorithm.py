@@ -11,8 +11,8 @@ class MyAlgorithm():
     """
     def build_model(self, traindata, valdata):
         max_epochs = 30
-        num_train = 12000
-        batch_size = 900
+        num_train = 1200
+        batch_size = 30
         img_size = 32
 
         # データの読み込み
