@@ -74,8 +74,9 @@ class Trainer:
         self.current_iter += 1
 
     def train(self):
-        for i in range(self.max_iter):
-            print("\riter: " + str(i) + " / " + str(self.max_iter), end="")
+        max_iter = self.max_iter
+        for i in range(max_iter):
+            print("\riter: " + str(i) + " / " + str(max_iter), end="")
             self.train_step()
 
         test_acc, test_3_acc = self.network.accuracy(self.x_test, self.t_test)

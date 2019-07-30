@@ -17,6 +17,7 @@ class ConvNet:
         filter_stride = conv_param['stride']
         input_size = input_dim[1]
         conv_output_size = (input_size - filter_size + 2 * filter_pad) / filter_stride + 1
+        conv_output_size = (conv_output_size / 2 - filter_size + 2 * filter_pad) / filter_stride + 1
         pool_output_size = int(filter_num * (conv_output_size / 2) * (conv_output_size / 2))
 
         # 重みの初期化
@@ -25,11 +26,14 @@ class ConvNet:
                             np.random.randn(filter_num, input_dim[0], filter_size, filter_size)
         self.params['b1'] = np.zeros(filter_num)
         self.params['W2'] = weight_init_std * \
-                            np.random.randn(pool_output_size, hidden_size)
-        self.params['b2'] = np.zeros(hidden_size)
+                            np.random.randn(filter_num, filter_num, filter_size, filter_size)
+        self.params['b2'] = np.zeros(filter_num)
         self.params['W3'] = weight_init_std * \
+                            np.random.randn(pool_output_size, hidden_size)
+        self.params['b3'] = np.zeros(hidden_size)
+        self.params['W4'] = weight_init_std * \
                             np.random.randn(hidden_size, output_size)
-        self.params['b3'] = np.zeros(output_size)
+        self.params['b4'] = np.zeros(output_size)
 
         # レイヤの生成
         self.layers = OrderedDict()
@@ -37,14 +41,19 @@ class ConvNet:
                                            conv_param['stride'], conv_param['pad'])
         self.layers['Relu1'] = Relu()
         self.layers['Pool1'] = Pooling(pool_h=2, pool_w=2, stride=2)
-        self.layers['Affine1'] = Affine(self.params['W2'], self.params['b2'])
+        self.layers['Conv2'] = Convolution(self.params['W2'], self.params['b2'],
+                                           conv_param['stride'], conv_param['pad'])
         self.layers['Relu2'] = Relu()
-        self.layers['Affine2'] = Affine(self.params['W3'], self.params['b3'])
+        self.layers['Pool2'] = Pooling(pool_h=2, pool_w=2, stride=2)
+        self.layers['Affine1'] = Affine(self.params['W3'], self.params['b3'])
+        self.layers['Relu3'] = Relu()
+        self.layers['Affine2'] = Affine(self.params['W4'], self.params['b4'])
 
         self.last_layer = SoftmaxWithLoss()
 
     def predict(self, x):
-        for layer in self.layers.values():
+        layer_values = self.layers.values()
+        for layer in layer_values:
             x = layer.forward(x)
         return x
 
@@ -76,14 +85,14 @@ class ConvNet:
         #             x[i + 1] *= reli[0][max_char]
         #             x[i] *= reli[0][np.argmax(x[i + 1])]
         #         print("af: [{}, {}, {}]".format(np.argmax(x[i]), np.argmax(x[i + 1]), np.argmax(x[i + 2])))
-        if os.path.exists("traindata_code_reliability.npy"):
-            reli = np.load("traindata_code_reliability.npy")
-            for i in range(0, x.shape[0], 3):
-                middle = np.argmax(x[i + 1])
-                x[i] *= reli[0][middle]
-                x[i + 2] *= reli[1][middle]
-        else:
-            print("error: not found file in ConvNet.predict_3_char")
+        # if os.path.exists("traindata_code_reliability.npy"):
+        #     reli = np.load("traindata_code_reliability.npy")
+        #     for i in range(0, x.shape[0], 3):
+        #         middle = np.argmax(x[i + 1])
+        #         x[i] *= reli[0][middle]
+        #         x[i + 2] *= reli[1][middle]
+        # else:
+        #     print("error: not found file in ConvNet.predict_3_char")
 
         return x
 
@@ -99,17 +108,12 @@ class ConvNet:
         acc = 0.0
         char_3_acc = 0.0
 
-        for i in range(int(x.shape[0] / (batch_size * 3))):
-            tx = x[i * batch_size * 3:(i + 1) * batch_size * 3]
-            tt = t[i * batch_size * 3:(i + 1) * batch_size * 3]
-            y = self.predict_3_char(tx)
-            y = np.argmax(y, axis=1)
-            acc_list = np.append(acc_list, (y == tt))
+        y = self.predict_3_char(x)
+        y = np.argmax(y, axis=1)
+        acc_list = np.append(acc_list, (y == t))
 
         acc = np.sum(acc_list) / x.shape[0]
-        for i in range(0, x.shape[0], 3):
-            char_3_acc += int(bool(acc_list[i]) & bool(acc_list[i + 1]) & bool(acc_list[i + 2]))
-        char_3_acc *= 3 / x.shape[0]
+        char_3_acc = np.floor(acc_list.reshape(-1, 3).sum(axis=1) / 3).sum() * 3 / x.shape[0]
 
         return acc, char_3_acc
 
@@ -117,7 +121,7 @@ class ConvNet:
         loss_w = lambda w: self.loss(x, t)
 
         grads = {}
-        for idx in (1, 2, 3):
+        for idx in (1, 2, 3, 4):
             grads['W' + str(idx)] = numerical_gradient(loss_w, self.params['W' + str(idx)])
             grads['b' + str(idx)] = numerical_gradient(loss_w, self.params['b' + str(idx)])
 
@@ -139,8 +143,9 @@ class ConvNet:
         # 設定
         grads = {}
         grads['W1'], grads['b1'] = self.layers['Conv1'].dW, self.layers['Conv1'].db
-        grads['W2'], grads['b2'] = self.layers['Affine1'].dW, self.layers['Affine1'].db
-        grads['W3'], grads['b3'] = self.layers['Affine2'].dW, self.layers['Affine2'].db
+        grads['W2'], grads['b2'] = self.layers['Conv2'].dW, self.layers['Conv2'].db
+        grads['W3'], grads['b3'] = self.layers['Affine1'].dW, self.layers['Affine1'].db
+        grads['W4'], grads['b4'] = self.layers['Affine2'].dW, self.layers['Affine2'].db
 
         return grads
 
@@ -157,6 +162,6 @@ class ConvNet:
         for key, val in params.items():
             self.params[key] = val
 
-        for i, key in enumerate(['Conv1', 'Affine1', 'Affine2']):
+        for i, key in enumerate(['Conv1', 'Conv2', 'Affine1', 'Affine2']):
             self.layers[key].W = self.params['W' + str(i + 1)]
             self.layers[key].b = self.params['b' + str(i + 1)]
