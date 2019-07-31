@@ -86,7 +86,7 @@ datapath = './dataset/'
 # Load dataset
 targets = AlconTargets(datapath, train_ratio=0.99)
 traindata = AlconDataset(datapath, targets.train, isTrainVal=True)
-num_train = 10000
+num_train = 12000
 img_size = 32
 filter = Image.open("filter2.jpg").convert('L')
 filter = np.array(filter.resize((img_size, img_size)))

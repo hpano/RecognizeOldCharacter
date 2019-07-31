@@ -155,7 +155,7 @@ def set_data(targets, target_name, num_train, filter, img_size):
         print("\rloading {} ... [{}] {}/{}".format(target_name, pro_bar, i, load_size), end="")
 
         img, codes = targets[i]
-        div_targets = np.append(div_targets, div_img(traindata[i][0], filter, img_size), axis=0)
+        div_targets = np.append(div_targets, div_img(targets[i][0], filter, img_size), axis=0)
         one_hot = np.identity(48, dtype=np.uint8)[codes]
         div_codes = np.append(div_codes, one_hot, axis=0)
 

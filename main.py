@@ -22,9 +22,9 @@ valdata = AlconDataset(datapath, targets.val, isTrainVal=True)
 testdata = AlconDataset(datapath, targets.test, isTrainVal=False)
 
 # Set params
-max_epochs = 200
+max_epochs = 30
 num_train = 12000
-batch_size = 900
+batch_size = 30
 img_size = 32
 
 # Train model

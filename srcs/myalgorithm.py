@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from srcs.convnet import ConvNet
 from srcs.functions import set_data
 from srcs.trainer import Trainer
+from PIL import Image
 
 
 class MyAlgorithm():
