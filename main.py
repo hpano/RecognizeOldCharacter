@@ -22,19 +22,27 @@ valdata = AlconDataset(datapath, targets.val, isTrainVal=True)
 testdata = AlconDataset(datapath, targets.test, isTrainVal=False)
 
 # Set params
-max_epochs = 30
-num_train = 12000
-batch_size = 30
+max_epochs = 3
+num_train = 600
+batch_size = 15
 img_size = 32
 
-# Train model
-print('Building model ...')
-myalg = MyAlgorithm()  # Your algorithm class
-myalg.build_model(traindata, valdata, max_epochs, num_train, batch_size, img_size)  # Train my model
-print('done')
+params_name = "params_3_600_15_1564606911"
+isTrain = True
+myalg = MyAlgorithm(traindata, valdata, testdata, max_epochs, num_train, batch_size, img_size, params_name)
 
-"""
+# Train model
+if isTrain:
+    print("Building model ...")
+    myalg.build_model()
+    print("done")
+
 # Prediction
+print("Predicting test data ...")
+myalg.predict()
+print("done, save prediction as 'test_prediction.csv'")
+
+'''
 N = len(valdata)
 sheet = valdata.getSheet()  # Get initial sheet
 for i in range(N):
@@ -54,4 +62,4 @@ print('Accuracy = {:f} (%)'.format(acc))
 # save predicted results in CSV
 # Zip and submit it.
 sheet.to_csv('test_prediction.csv', index=False)
-"""
+'''

@@ -112,13 +112,17 @@ def calc_code_reliability(datapath):
 
         # TF-IDFによる単語の重要度計算
         d_sum = np.sum(code_reliability, axis=1, keepdims=True)
-        print(d_sum)
+        # print(d_sum)
         tf = code_reliability / d_sum
-        print(tf)
+        # print(tf)
         td_num = np.count_nonzero(code_reliability > 0, axis=0) + 1
-        print(td_num)
-        idf = np.log(48 / td_num)
-        print(idf)
+        # print(td_num)
+        idf = np.log2(48 / td_num)
+        # print(idf)
+        tfidf = tf * idf
+        # print(tfidf)
+        # 何らかの補正
+        code_reliability = tfidf + 0
 
     return code_reliability
 

@@ -139,7 +139,6 @@ def set_data(targets, target_name, num_train, filter, img_size):
         # print("not found")
         div_targets = np.empty((0, 1, img_size, img_size))
         div_codes = np.empty((0, 48))
-        # code_reliability = np.zeros((2, 48, 48), int)
 
         for i in range(load_size):
             pro_rate = int((i / load_size) * pro_size)
@@ -151,24 +150,13 @@ def set_data(targets, target_name, num_train, filter, img_size):
             one_hot = np.identity(48, dtype=np.uint8)[codes]
             div_codes = np.append(div_codes, one_hot, axis=0)
 
-            # 要修正
-            # code0 = codes[0]
-            # code1 = codes[1]
-            # code2 = codes[2]
-            # code_reliability[1][code0][code1] += 1
-            # code_reliability[0][code1][code0] += 1
-            # code_reliability[1][code1][code2] += 1
-            # code_reliability[0][code2][code1] += 1
-
         np.save("{}_{}_img".format(target_name, load_size), div_targets)
         np.save("{}_{}_code".format(target_name, load_size), div_codes)
-        # np.save("{}_{}_code_reliability".format(target_name, load_size), code_reliability)
+        print()
 
     else:
         div_targets = np.load("{}_{}_img.npy".format(target_name, load_size))
         div_codes = np.load("{}_{}_code.npy".format(target_name, load_size))
-
-    print("\nload finished.")
 
     return div_targets[:load_size * 3], div_codes[:load_size * 3]
 

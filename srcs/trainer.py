@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
+sys.path.append(os.pardir)
 import numpy as np
 from srcs.optimizer import *
 
@@ -86,7 +86,3 @@ class Trainer:
             print("=============== Final Test Accuracy ===============")
             print("1 char test acc: " + str(test_acc))
             print("3 char test acc: " + str(test_3_acc))
-            # a = np.load("code_reliability.npy")
-            # for i in range(48):
-            #     print(str(i) + ", 0 :" + str(np.sum(a[0][i])))
-            #     print(str(i) + ", 1 :" + str(np.sum(a[1][i])))
