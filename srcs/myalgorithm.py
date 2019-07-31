@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from srcs.convnet import ConvNet
 from srcs.functions import set_data
 from srcs.trainer import Trainer
+import time
 from PIL import Image
 
 
@@ -11,7 +12,7 @@ class MyAlgorithm():
     Build your algorithm.
     """
     def build_model(self, traindata, valdata, max_epochs, num_train, batch_size, img_size):
-        filter = Image.open("filter2.jpg").convert('L')
+        filter = Image.open("filter.jpg").convert('L')
         filter = np.array(filter.resize((img_size, img_size)))
 
         # データの読み込み
@@ -35,8 +36,10 @@ class MyAlgorithm():
         trainer.train()
 
         # パラメータの保存
-        network.save_params("params_{}_{}_{}.pkl".format(max_epochs, num_train, batch_size))
-        print("Saved Network Parameters!")
+        ut = int(time.time())
+        params_name = "params_{}_{}_{}_{}.pkl".format(max_epochs, num_train, batch_size, ut)
+        network.save_params(params_name)
+        print("Saved Network Parameters as '{}'!".format(params_name))
 
         # グラフの描画
         markers = {'train': 'o', 'test': 's'}
