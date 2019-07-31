@@ -9,12 +9,7 @@ class MyAlgorithm():
     """
     Build your algorithm.
     """
-    def build_model(self, traindata, valdata):
-        max_epochs = 200
-        num_train = 12000
-        batch_size = 900
-        img_size = 32
-
+    def build_model(self, traindata, valdata, max_epochs, num_train, batch_size, img_size):
         # データの読み込み
         (x_train, t_train) = set_data(traindata, "traindata", num_train, img_size)
         (x_val, t_val) = set_data(valdata, "valdata", num_train, img_size)

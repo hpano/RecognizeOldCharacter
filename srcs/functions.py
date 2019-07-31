@@ -127,51 +127,76 @@ def code2index(code):
     return codes.index(code)
 
 
-def set_data(targets, target_name, num_train, img_size):
+def set_data(targets, target_name, num_train, filter, img_size):
     load_size = min(num_train, len(targets))
     pro_size = 20
     memory_size = 0
 
-    if not os.path.exists("./{}_img.npy".format(target_name, load_size)):
+    div_targets = np.empty((0, 1, img_size, img_size))
+    div_codes = np.empty((0, 48), dtype=np.uint8)
+
+    if not os.path.exists("./{}_{}_img.npy".format(target_name, load_size)):
         # print("not found")
         div_targets = np.empty((0, 1, img_size, img_size))
         div_codes = np.empty((0, 48))
         code_reliability = np.zeros((2, 48, 48), int)
     else:
-        div_targets = np.load("{}_img.npy".format(target_name))
-        div_codes = np.load("{}_code.npy".format(target_name))
-        code_reliability = np.load("{}_code_reliability.npy".format(target_name))
+        div_targets = np.load("{}_{}_img.npy".format(target_name, load_size))
+        div_codes = np.load("{}_{}_code.npy".format(target_name, load_size))
+        code_reliability = np.load("{}_{}_code_reliability.npy".format(target_name, load_size))
         # code_reliability = np.zeros((2, 48, 48), int)
-        memory_size = int(div_targets.shape[0] / 3)
+        # memory_size = int(div_targets.shape[0] / 3)
         # print(memory_size)
 
     for i in range(memory_size, load_size):
         pro_rate = int((i / load_size) * pro_size)
         pro_bar = ("=" * (pro_rate)) + (" " * int(pro_size - pro_rate))
-        print("\rloading data ... [{}] {}/{}".format(pro_bar, i, load_size), end="")
+        print("\rloading {} ... [{}] {}/{}".format(target_name, pro_bar, i, load_size), end="")
 
         img, codes = targets[i]
-        img = img.convert('L')  # Gray scale
-        img = np.array(img.resize((img_size, img_size * 3)))
+        div_targets = np.append(div_targets, div_img(traindata[i][0], filter, img_size), axis=0)
+        one_hot = np.identity(48, dtype=np.uint8)[codes]
+        div_codes = np.append(div_codes, one_hot, axis=0)
 
-        for j in range(3):
-            div_targets = np.append(div_targets, [[img[(j * img_size):((j + 1) * img_size)]]], axis=0)
-            one_hot_code = np.zeros(48, int)
-            one_hot_code[code2index(codes[j])] = 1
-            div_codes = np.append(div_codes, [one_hot_code], axis=0)
+        # 要修正
+        code0 = codes[0]
+        code1 = codes[1]
+        code2 = codes[2]
+        code_reliability[1][code0][code1] += 1
+        code_reliability[0][code1][code0] += 1
+        code_reliability[1][code1][code2] += 1
+        code_reliability[0][code2][code1] += 1
 
-        code_reliability[1][code2index(codes[0])][code2index(codes[1])] += 1
-        code_reliability[0][code2index(codes[1])][code2index(codes[0])] += 1
-        code_reliability[1][code2index(codes[1])][code2index(codes[2])] += 1
-        code_reliability[0][code2index(codes[2])][code2index(codes[1])] += 1
-
-    np.save("{}_img".format(target_name), div_targets)
-    np.save("{}_code".format(target_name), div_codes)
-    np.save("{}_code_reliability".format(target_name), code_reliability)
+    np.save("{}_{}_img".format(target_name, load_size), div_targets)
+    np.save("{}_{}_code".format(target_name, load_size), div_codes)
+    np.save("{}_{}_code_reliability".format(target_name, load_size), code_reliability)
     print("\nload finished.")
 
     return div_targets[:load_size * 3], div_codes[:load_size * 3]
 
 
-# def div_img():
-#     for i in range(0)
+def div_img(img, filter, img_size):
+    # 分割位置決定
+    img_sum = img.sum(axis=1)
+    img_sum = img_sum + np.append(0, img_sum[1:]) + np.append(img_sum[:(img_size * 3 - 1)], 0)
+    band_rate = 0.375
+    start = int(img_size * (1 - band_rate))
+    end = int(img_size * (1 + band_rate))
+    div_pos_1 = img_sum[start:end].argmax() + start
+    rest = int((img_size * 3 - div_pos_1) / 2)
+    band = int(band_rate * rest)
+    start = div_pos_1 + rest - band
+    end = div_pos_1 + rest + band
+    div_pos_2 = img_sum[start:end].argmax() + start
+
+    # 分割、リサイズ
+    img1 = np.array(Image.fromarray(np.uint8(img[:div_pos_1])).resize((img_size, img_size)))
+    img2 = np.array(Image.fromarray(np.uint8(img[div_pos_1:div_pos_2])).resize((img_size, img_size)))
+    img3 = np.array(Image.fromarray(np.uint8(img[div_pos_2:])).resize((img_size, img_size)))
+    img = np.array([[img1], [img2], [img3]])
+
+    # フィルターを通す
+    img = (img / 2 + filter / 2)
+    img = (img > 70) * 255
+
+    return img

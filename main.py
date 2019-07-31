@@ -21,10 +21,16 @@ traindata = AlconDataset(datapath, targets.train, isTrainVal=True)
 valdata = AlconDataset(datapath, targets.val, isTrainVal=True)
 testdata = AlconDataset(datapath, targets.test, isTrainVal=False)
 
+# Set params
+max_epochs = 200
+num_train = 12000
+batch_size = 900
+img_size = 32
+
 # Train model
 print('Building model ...')
 myalg = MyAlgorithm()  # Your algorithm class
-myalg.build_model(traindata, valdata)  # Train my model
+myalg.build_model(traindata, valdata, max_epochs, num_train, batch_size, img_size)  # Train my model
 print('done')
 
 """
