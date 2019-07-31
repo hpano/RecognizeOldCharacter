@@ -10,9 +10,12 @@ class MyAlgorithm():
     Build your algorithm.
     """
     def build_model(self, traindata, valdata, max_epochs, num_train, batch_size, img_size):
+        filter = Image.open("filter2.jpg").convert('L')
+        filter = np.array(filter.resize((img_size, img_size)))
+
         # データの読み込み
-        (x_train, t_train) = set_data(traindata, "traindata", num_train, img_size)
-        (x_val, t_val) = set_data(valdata, "valdata", num_train, img_size)
+        (x_train, t_train) = set_data(traindata, "traindata", num_train, filter, img_size)
+        (x_val, t_val) = set_data(valdata, "valdata", num_train, filter, img_size)
 
         # 処理に時間のかかる場合はデータを削減
         # x_train, t_train = x_train[:5000], t_train[:5000]
@@ -31,7 +34,7 @@ class MyAlgorithm():
         trainer.train()
 
         # パラメータの保存
-        network.save_params("params.pkl")
+        network.save_params("params_{}_{}_{}.pkl".format(max_epochs, num_train, batch_size))
         print("Saved Network Parameters!")
 
         # グラフの描画
