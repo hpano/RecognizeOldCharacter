@@ -1,6 +1,7 @@
 import os
 from numba import jit
 import numpy as np
+from PIL import Image
 
 
 def softmax(x):
