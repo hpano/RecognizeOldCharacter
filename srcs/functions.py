@@ -127,7 +127,7 @@ def code2index(code):
     return codes.index(code)
 
 
-def divide_img(targets, target_name, num_train, img_size):
+def set_data(targets, target_name, num_train, img_size):
     load_size = min(num_train, len(targets))
     pro_size = 20
     memory_size = 0
@@ -171,3 +171,7 @@ def divide_img(targets, target_name, num_train, img_size):
     print("\nload finished.")
 
     return div_targets[:load_size * 3], div_codes[:load_size * 3]
+
+
+# def div_img():
+#     for i in range(0)

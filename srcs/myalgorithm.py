@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from srcs.convnet import ConvNet
-from srcs.functions import divide_img
+from srcs.functions import set_data
 from srcs.trainer import Trainer
 
 
@@ -10,14 +10,14 @@ class MyAlgorithm():
     Build your algorithm.
     """
     def build_model(self, traindata, valdata):
-        max_epochs = 30
-        num_train = 1200
-        batch_size = 30
+        max_epochs = 200
+        num_train = 12000
+        batch_size = 900
         img_size = 32
 
         # データの読み込み
-        (x_train, t_train) = divide_img(traindata, "traindata", num_train, img_size)
-        (x_val, t_val) = divide_img(valdata, "valdata", num_train, img_size)
+        (x_train, t_train) = set_data(traindata, "traindata", num_train, img_size)
+        (x_val, t_val) = set_data(valdata, "valdata", num_train, img_size)
 
         # 処理に時間のかかる場合はデータを削減
         # x_train, t_train = x_train[:5000], t_train[:5000]

@@ -6,3 +6,6 @@ max_epochs, num_train, batch_size, train_acc, train_3_acc, test_acc, test_3_acc,
 # fix ConvNet.accuracy
 100, 12000,  900, 0.824, 0.573, 0.530, 0.241, 0.124
 # add conv layer
+ 30,  1200,   30, 0.833, 0.622. 0.455, 0.121, 0.500
+ 50,  1200,   30, 0.870, 0.693, 0.437, 0.110, 0.053
+200, 12000,  900, 
