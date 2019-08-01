@@ -18,9 +18,9 @@ valdata = AlconDataset(datapath, targets.val, isTrainVal=True)
 testdata = AlconDataset(datapath, targets.test, isTrainVal=False)
 
 # Set params
-max_epochs = 3
+max_epochs = 100
 num_train = 12000
-batch_size = 15
+batch_size = 900
 img_size = 32
 
 params_name = "params_100_12000_900_1564640851.pkl"

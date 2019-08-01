@@ -75,9 +75,9 @@ class MyAlgorithm():
         # (x_test, t_test) = set_data(self.valdata, "valdata", self.num_train, self.filter, self.img_size)
 
         # 処理に時間のかかる場合はデータを削減 for debug
-        test_len = 600
+        # test_len = 600
         test3_len = test_len * 3
-        x_test, t_test = x_test[:test3_len], t_test[:test3_len]
+        # x_test, t_test = x_test[:test3_len], t_test[:test3_len]
 
         # パラメータの読み込み
         msg = "loading params"
