@@ -75,7 +75,7 @@ class ConvNet:
             max_char = np.diag(max_idx[:, max_num_idx])  # その文字種 0-47
 
             for i in range(set_num):
-                print("bf: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
+                # print("bf: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
                 base_idx = max_num_idx[i]
                 base_char = max_char[i]
                 if base_idx == 0:
@@ -87,7 +87,7 @@ class ConvNet:
                 else:
                     x[i][1] += code_reli_t[base_char]
                     x[i][0] += code_reli_t[np.argmax(x[i][1])]
-                print("af: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
+                # print("af: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
 
             x = np.reshape(x, (set_num * 3, 48))
 
@@ -100,7 +100,7 @@ class ConvNet:
         y = self.predict(x)
         return self.last_layer.forward(y, t)
 
-    def accuracy(self, x, t, batch_size=100):
+    def accuracy(self, x, t, batch_size=120):
         if t.ndim != 1:
             t = np.argmax(t, axis=1)
 
@@ -108,7 +108,11 @@ class ConvNet:
         acc = 0.0
         char_3_acc = 0.0
 
-        y = self.predict_3_char(x)
+        x_len = x.shape[0]
+        y = np.empty((0, 48))
+        for i in range(0, x_len, batch_size):
+            pred = self.predict_3_char(x[i:(i + batch_size)])
+            y = np.append(y, pred, axis=0)
         y = np.argmax(y, axis=1)
         acc_list = np.append(acc_list, (y == t))
 

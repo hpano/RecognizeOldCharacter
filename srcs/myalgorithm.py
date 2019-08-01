@@ -71,11 +71,13 @@ class MyAlgorithm():
 
         # データの読み込み
         (x_test, t_test) = set_data(self.testdata, "testdata", test_len, self.filter, self.img_size)
+        # # for debug
+        # (x_test, t_test) = set_data(self.valdata, "valdata", self.num_train, self.filter, self.img_size)
 
         # 処理に時間のかかる場合はデータを削減 for debug
-        test_len = 12
+        test_len = 600
         test3_len = test_len * 3
-        x_test = x_test[:test3_len]
+        x_test, t_test = x_test[:test3_len], t_test[:test3_len]
 
         # パラメータの読み込み
         msg = "loading params"
@@ -85,24 +87,29 @@ class MyAlgorithm():
         self.network.load_params(param_fnm)
         print_progress_bar(msg, 1, 1)
 
+        # # for debug
+        # test_acc, test_3_acc = self.network.accuracy(x_test, t_test)
+        # print(test_acc)
+        # print(test_3_acc)
+
         # 文字予測
         y = np.empty((0, 48))
         msg = "predicting testdata"
         for i in range(0, test3_len, batch_size):
-            # print_progress_bar(msg, i, test3_len)
+            print_progress_bar(msg, i, test3_len)
             pred = self.network.predict_3_char(x_test[i:(i + batch_size)])
             y = np.append(y, pred, axis=0)
-        # print_progress_bar(msg, i + batch_size, test3_len)
+        print_progress_bar(msg, i + batch_size, test3_len)
         y = np.argmax(y, axis=1)
         y = np.reshape(y, (-1, 3))
 
         # 文字コードに変換
         msg = "encoding testdata"
         for i in range(test_len):
-            # print_progress_bar(msg, i, test_len)
+            print_progress_bar(msg, i, test_len)
             sheet.iloc[i, 1:4] = [index2code(y[i][0]), index2code(y[i][1]), index2code(y[i][2])]
-        # print_progress_bar(msg, i + 1, test_len)
+        print_progress_bar(msg, i + 1, test_len)
 
         # save predicted results in CSV
         # Zip and submit it.
-        # sheet.to_csv('test_prediction.csv', index=False)
+        sheet.to_csv('test_prediction.csv', index=False)

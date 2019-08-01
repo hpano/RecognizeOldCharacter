@@ -217,7 +217,7 @@ def calc_code_reliability():
         idf = np.log2(48 / td_num)
         tfidf = tf * idf
         # predict値と合わせるための補正
-        code_reliability = tfidf * 3000
+        code_reliability = tfidf * 49
 
         np.save(file_name, code_reliability)
 

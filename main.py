@@ -19,11 +19,11 @@ testdata = AlconDataset(datapath, targets.test, isTrainVal=False)
 
 # Set params
 max_epochs = 3
-num_train = 600
+num_train = 12000
 batch_size = 15
 img_size = 32
 
-params_name = "params_200_12000_900_0123.pkl"
+params_name = "params_100_12000_900_1564640851.pkl"
 isTrain = False
 myalg = MyAlgorithm(traindata, valdata, testdata, max_epochs, num_train, batch_size, img_size, params_name)
 
