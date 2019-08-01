@@ -130,33 +130,32 @@ def code2index(code):
 
 def set_data(targets, target_name, num_train, filter, img_size):
     load_size = min(num_train, len(targets))
-    pro_size = 20
+    isTest = (target_name == "testdata")
 
     div_targets = np.empty((0, 1, img_size, img_size))
     div_codes = np.empty((0, 48), dtype=np.uint8)
 
-    if not os.path.exists("./{}_{}_img.npy".format(target_name, load_size)):
-        # print("not found")
+    if not os.path.exists("./npy/{}_{}_img.npy".format(target_name, load_size)):
         div_targets = np.empty((0, 1, img_size, img_size))
         div_codes = np.empty((0, 48))
 
+        msg = "loading {}".format(target_name)
         for i in range(load_size):
-            pro_rate = int((i / load_size) * pro_size)
-            pro_bar = ("=" * (pro_rate)) + (" " * int(pro_size - pro_rate))
-            print("\rloading {} ... [{}] {}/{}".format(target_name, pro_bar, i, load_size), end="")
+            print_progress_bar(msg, i, load_size)
 
             img, codes = targets[i]
             div_targets = np.append(div_targets, div_img(targets[i][0], filter, img_size), axis=0)
-            one_hot = np.identity(48, dtype=np.uint8)[codes]
-            div_codes = np.append(div_codes, one_hot, axis=0)
+            if not isTest:
+                one_hot = np.identity(48, dtype=np.uint8)[codes]
+                div_codes = np.append(div_codes, one_hot, axis=0)
+        print_progress_bar(msg, i + 1, load_size)
 
-        np.save("{}_{}_img".format(target_name, load_size), div_targets)
-        np.save("{}_{}_code".format(target_name, load_size), div_codes)
-        print()
+        np.save("./npy/{}_{}_img".format(target_name, load_size), div_targets)
+        np.save("./npy/{}_{}_code".format(target_name, load_size), div_codes)
 
     else:
-        div_targets = np.load("{}_{}_img.npy".format(target_name, load_size))
-        div_codes = np.load("{}_{}_code.npy".format(target_name, load_size))
+        div_targets = np.load("./npy/{}_{}_img.npy".format(target_name, load_size))
+        div_codes = np.load("./npy/{}_{}_code.npy".format(target_name, load_size))
 
     return div_targets[:load_size * 3], div_codes[:load_size * 3]
 
@@ -186,3 +185,14 @@ def div_img(img, filter, img_size):
     img = (img > 70) * 255
 
     return img
+
+
+def print_progress_bar(msg, current_progress, total_size):
+    pro_size = 20
+    msg_size = 20
+    pro_rate = int((current_progress / total_size) * pro_size)
+    pro_bar = ("=" * (pro_rate)) + (" " * int(pro_size - pro_rate))
+    msg += " " * (msg_size - len(msg))
+    print("\r{}[{}] {}/{}".format(msg, pro_bar, current_progress, total_size), end="")
+    if current_progress == total_size:
+        print()

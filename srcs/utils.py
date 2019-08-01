@@ -99,7 +99,8 @@ class AlconDataset():
 
         # Get annotations
         unicodes = list(self.targets.iloc[idx, 1:4])
-        unicodes = np.array([code2index(unicodes[0]), code2index(unicodes[1]), code2index(unicodes[2])])
+        if type(unicodes[0]) is str:
+            unicodes = np.array([code2index(unicodes[0]), code2index(unicodes[1]), code2index(unicodes[2])])
 
         return  img, unicodes
 

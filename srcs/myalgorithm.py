@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from srcs.convnet import ConvNet
-from srcs.functions import set_data
+from srcs.functions import set_data, index2code, print_progress_bar
 from srcs.trainer import Trainer
 import time
 from PIL import Image
+from pathlib import Path
 
 
 class MyAlgorithm():
@@ -25,25 +26,27 @@ class MyAlgorithm():
 
     def build_model(self):
         # データの読み込み
-        print("setting data ...")
+        msg = "setting data"
+        print_progress_bar(msg, 0, 3)
         # code_reliability
         (x_train, t_train) = set_data(self.traindata, "traindata", self.num_train, self.filter, self.img_size)
         (x_val, t_val) = set_data(self.valdata, "valdata", self.num_train, self.filter, self.img_size)
+        print_progress_bar(msg, 3, 3)
 
         # 学習
         trainer = Trainer(self.network, x_train, t_train, x_val, t_val,
                           epochs=self.max_epochs, mini_batch_size=self.batch_size,
                           optimizer='Adam', optimizer_param={'lr': 0.001},
                           evaluate_sample_num_per_epoch=900)
-        print("train ...")
+        print("training")
         trainer.train()
 
         # パラメータの保存
         ut = int(time.time())
         params_name = "params_{}_{}_{}_{}.pkl".format(self.max_epochs, self.num_train, self.batch_size, ut)
-        self.network.save_params(params_name)
+        self.network.save_params("./params/{}".format(params_name))
         self.params_name = params_name
-        print("Saved Network Parameters as '{}'!".format(params_name))
+        print("saved network parameters as '{}'".format(params_name))
 
         # グラフの描画
         markers = {'train': 'o', 'test': 's'}
@@ -56,27 +59,49 @@ class MyAlgorithm():
         plt.ylabel("accuracy")
         plt.ylim(0, 1.0)
         plt.legend(loc='lower right')
+        figure_name = "Figure_{}_{}_{}_{}.png".format(self.max_epochs, self.num_train, self.batch_size, ut)
+        plt.savefig("./figures/{}".format(figure_name))
+        print("saved figure as '{}'".format(figure_name))
         plt.show()
 
-    # Output is expected as list, ['U+304A','U+304A','U+304A']
     def predict(self):
         sheet = self.testdata.getSheet()
         test_len = len(self.testdata)
+        batch_size = 120
 
         # データの読み込み
         (x_test, t_test) = set_data(self.testdata, "testdata", test_len, self.filter, self.img_size)
 
         # 処理に時間のかかる場合はデータを削減 for debug
-        # x_test, t_test = x_test[:100], t_test[:100]
+        test_len = 1200
+        test3_len = test_len * 3
+        x_test = x_test[:test3_len]
 
         # パラメータの読み込み
-        self.network.load_params(self.params_name)
+        msg = "loading params"
+        print_progress_bar(msg, 0, 1)
+        param_fnm = Path("./params/{}".format(self.params_name))
+        assert param_fnm.exists(), "file '{}' not exist.".format(param_fnm)
+        self.network.load_params(param_fnm)
+        print_progress_bar(msg, 1, 1)
 
-        y = self.network.predict_3_char(x_test)
+        # 文字予測
+        y = np.empty((0, 48))
+        msg = "predicting testdata"
+        for i in range(0, test3_len, batch_size):
+            print_progress_bar(msg, i, test3_len)
+            pred = self.network.predict_3_char(x_test[i:(i + batch_size)])
+            y = np.append(y, pred, axis=0)
+        print_progress_bar(msg, i + batch_size, test3_len)
         y = np.argmax(y, axis=1)
-        # ここでy成形する処理を書く
+        y = np.reshape(y, (-1, 3))
+
+        # 文字コードに変換
+        msg = "encoding testdata"
         for i in range(test_len):
-            sheet.iloc[i, 1:4] = (['U+0000'], ['U+0000'], ['U+0000'])
+            print_progress_bar(msg, i, test_len)
+            sheet.iloc[i, 1:4] = [index2code(y[i][0]), index2code(y[i][1]), index2code(y[i][2])]
+        print_progress_bar(msg, i + 1, test_len)
 
         # save predicted results in CSV
         # Zip and submit it.

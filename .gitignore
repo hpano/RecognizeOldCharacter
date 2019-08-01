@@ -103,9 +103,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# photos
+# datas
 dataset/
-traindata_img.npy
-valdata_img.npy
-traindata_12000_img.npy
+figures/
+npy/
+params/
 
