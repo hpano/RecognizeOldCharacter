@@ -60,39 +60,39 @@ class ConvNet:
     def predict_3_char(self, x):
         x = self.predict(x)
 
-        # 前後の文字の連続する度合を掛ける 要検証
-        # if os.path.exists("traindata_code_reliability.npy"):
-        #     reli = np.load("traindata_code_reliability.npy")
-        #     for i in range(0, x.shape[0], 3):
-        #         print("bf: [{}, {}, {}]".format(np.argmax(x[i]), np.argmax(x[i + 1]), np.argmax(x[i + 2])))
-        #         max = 0
-        #         for idx in range(i, i + 3):
-        #             for char in range(x.shape[1]):
-        #                 if x[idx][char] > max:
-        #                     max_i = idx
-        #                     max_char = char
-        #         if max_i is None:
-        #             print(x[i])
-        #             print(x[i + 1])
-        #             print(x[i + 2])
-        #         if (max_i % 3) == 0:
-        #             x[i + 1] *= reli[1][max_char]
-        #             x[i + 2] *= reli[1][np.argmax(x[i + 1])]
-        #         elif (max_i % 3) == 1:
-        #             x[i] *= reli[0][max_char]
-        #             x[i + 2] *= reli[1][max_char]
-        #         else:
-        #             x[i + 1] *= reli[0][max_char]
-        #             x[i] *= reli[0][np.argmax(x[i + 1])]
-        #         print("af: [{}, {}, {}]".format(np.argmax(x[i]), np.argmax(x[i + 1]), np.argmax(x[i + 2])))
-        # if os.path.exists("traindata_code_reliability.npy"):
-        #     reli = np.load("traindata_code_reliability.npy")
-        #     for i in range(0, x.shape[0], 3):
-        #         middle = np.argmax(x[i + 1])
-        #         x[i] *= reli[0][middle]
-        #         x[i + 2] *= reli[1][middle]
-        # else:
-        #     print("error: not found file in ConvNet.predict_3_char")
+        # 前後の文字の連続する度合で補正
+        code_reli_file = "code_reliability.npy"
+        if os.path.exists(code_reli_file):
+            code_reli = np.load(code_reli_file)
+            code_reli_t = code_reli.T
+            set_num = int(x.shape[0] / 3)
+            x = np.reshape(x, (set_num, 3, 48))
+
+            max = np.amax(x, axis=2, keepdims=True)  # 各1文字で最大の値
+            max_idx = np.argmax(x, axis=2)  # その文字種 0-47
+            max_num_idx = np.argmax(max, axis=1)
+            max_num_idx = np.reshape(max_num_idx, (-1))  # 3文字の中で最大の値をもつ文字位置 0-2
+            max_char = np.diag(max_idx[:, max_num_idx])  # その文字種 0-47
+
+            for i in range(set_num):
+                print("bf: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
+                base_idx = max_num_idx[i]
+                base_char = max_char[i]
+                if base_idx == 0:
+                    x[i][1] += code_reli[base_char]
+                    x[i][2] += code_reli[np.argmax(x[i][1])]
+                elif base_idx == 1:
+                    x[i][0] += code_reli_t[base_char]
+                    x[i][2] += code_reli[base_char]
+                else:
+                    x[i][1] += code_reli_t[base_char]
+                    x[i][0] += code_reli_t[np.argmax(x[i][1])]
+                print("af: [{}, {}, {}]".format(np.argmax(x[i][0]), np.argmax(x[i][1]), np.argmax(x[i][2])))  # for debug
+
+            x = np.reshape(x, (set_num * 3, 48))
+
+        else:
+            print("error: not found file in ConvNet.predict_3_char")
 
         return x
 

@@ -7,12 +7,12 @@ from srcs.utils import AlconDataset, AlconTargets, unicode_to_kana_list, evaluat
 from PIL import Image
 
 
-def calc_code_reliability(datapath):
+def calc_code_reliability():
     if not os.path.exists("./code_reliability_test.npy"):
         code_reliability = np.zeros((48, 48), int)
         pro_size = 20
 
-        fnm = Path(datapath) / Path('train') / 'annotations.csv'
+        fnm = Path("./dataset/train/annotations.csv")
         assert fnm.exists()
         df = pd.read_csv(fnm)
         df_len = len(df)

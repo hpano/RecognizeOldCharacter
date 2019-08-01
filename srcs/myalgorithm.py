@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from srcs.convnet import ConvNet
-from srcs.functions import set_data, index2code, print_progress_bar
+from srcs.functions import index2code, set_data, calc_code_reliability, print_progress_bar
 from srcs.trainer import Trainer
 import time
 from PIL import Image
@@ -23,15 +23,15 @@ class MyAlgorithm():
                           hidden_size=100, output_size=48, weight_init_std=0.01)
         filter = Image.open("filter.jpg").convert('L')
         self.filter = np.array(filter.resize((self.img_size, self.img_size)))
+        calc_code_reliability()
 
     def build_model(self):
         # データの読み込み
         msg = "setting data"
-        print_progress_bar(msg, 0, 3)
-        # code_reliability
+        print_progress_bar(msg, 0, 2)
         (x_train, t_train) = set_data(self.traindata, "traindata", self.num_train, self.filter, self.img_size)
         (x_val, t_val) = set_data(self.valdata, "valdata", self.num_train, self.filter, self.img_size)
-        print_progress_bar(msg, 3, 3)
+        print_progress_bar(msg, 2, 2)
 
         # 学習
         trainer = Trainer(self.network, x_train, t_train, x_val, t_val,
@@ -73,7 +73,7 @@ class MyAlgorithm():
         (x_test, t_test) = set_data(self.testdata, "testdata", test_len, self.filter, self.img_size)
 
         # 処理に時間のかかる場合はデータを削減 for debug
-        test_len = 1200
+        test_len = 12
         test3_len = test_len * 3
         x_test = x_test[:test3_len]
 
@@ -89,20 +89,20 @@ class MyAlgorithm():
         y = np.empty((0, 48))
         msg = "predicting testdata"
         for i in range(0, test3_len, batch_size):
-            print_progress_bar(msg, i, test3_len)
+            # print_progress_bar(msg, i, test3_len)
             pred = self.network.predict_3_char(x_test[i:(i + batch_size)])
             y = np.append(y, pred, axis=0)
-        print_progress_bar(msg, i + batch_size, test3_len)
+        # print_progress_bar(msg, i + batch_size, test3_len)
         y = np.argmax(y, axis=1)
         y = np.reshape(y, (-1, 3))
 
         # 文字コードに変換
         msg = "encoding testdata"
         for i in range(test_len):
-            print_progress_bar(msg, i, test_len)
+            # print_progress_bar(msg, i, test_len)
             sheet.iloc[i, 1:4] = [index2code(y[i][0]), index2code(y[i][1]), index2code(y[i][2])]
-        print_progress_bar(msg, i + 1, test_len)
+        # print_progress_bar(msg, i + 1, test_len)
 
         # save predicted results in CSV
         # Zip and submit it.
-        sheet.to_csv('test_prediction.csv', index=False)
+        # sheet.to_csv('test_prediction.csv', index=False)

@@ -12,4 +12,413 @@ max_epochs, num_train, batch_size, train_acc, train_3_acc, test_acc, test_3_acc,
 # update div_img
  30,  1200,   30, 0.980, 0.940, 0.483, 0.138, 0.012
  30, 12000,   30, 0.867, 0.641, 0.651, 0.345, 0.305
-100, 12000,  900,
+100, 12000,  900, 0.948, 0.853, 0.702, 0.400, 0.154
+
+
+
+train ...
+                    train loss:3.8330663759908528
+=== epoch:   1, train acc: 0.051, train 3 acc: 0.000, test acc: 0.049, test 3 acc: 0.000 ===
+                    train loss:3.4256813165199067
+=== epoch:   2, train acc: 0.109, train 3 acc: 0.000, test acc: 0.121, test 3 acc: 0.003 ===
+                    train loss:2.7696563006592383
+=== epoch:   3, train acc: 0.311, train 3 acc: 0.033, test acc: 0.291, test 3 acc: 0.033 ===
+                    train loss:2.3404350174854796
+=== epoch:   4, train acc: 0.441, train 3 acc: 0.080, test acc: 0.436, test 3 acc: 0.107 ===
+                    train loss:1.9524119727897138
+=== epoch:   5, train acc: 0.499, train 3 acc: 0.143, test acc: 0.516, test 3 acc: 0.170 ===
+                    train loss:1.6225620511377146
+=== epoch:   6, train acc: 0.574, train 3 acc: 0.220, test acc: 0.558, test 3 acc: 0.207 ===
+                    train loss:1.4231593323009539
+=== epoch:   7, train acc: 0.583, train 3 acc: 0.230, test acc: 0.569, test 3 acc: 0.213 ===
+                    train loss:1.3110300955993592
+=== epoch:   8, train acc: 0.646, train 3 acc: 0.307, test acc: 0.632, test 3 acc: 0.293 ===
+                    train loss:1.2165560476987228
+=== epoch:   9, train acc: 0.668, train 3 acc: 0.333, test acc: 0.661, test 3 acc: 0.333 ===
+                    train loss:1.2263428114812025
+=== epoch:  10, train acc: 0.678, train 3 acc: 0.377, test acc: 0.660, test 3 acc: 0.323 ===
+                    train loss:1.0587230171149657
+=== epoch:  11, train acc: 0.701, train 3 acc: 0.400, test acc: 0.674, test 3 acc: 0.337 ===
+                    train loss:1.1402434633846004
+=== epoch:  12, train acc: 0.703, train 3 acc: 0.403, test acc: 0.683, test 3 acc: 0.340 ===
+                    train loss:1.0903378785009474
+=== epoch:  13, train acc: 0.718, train 3 acc: 0.423, test acc: 0.700, test 3 acc: 0.373 ===
+                    train loss:0.9531920841192884
+=== epoch:  14, train acc: 0.747, train 3 acc: 0.470, test acc: 0.723, test 3 acc: 0.420 ===
+                    train loss:0.9114338926751273
+=== epoch:  15, train acc: 0.731, train 3 acc: 0.437, test acc: 0.690, test 3 acc: 0.370 ===
+                    train loss:0.9093913689335391
+=== epoch:  16, train acc: 0.747, train 3 acc: 0.483, test acc: 0.723, test 3 acc: 0.433 ===
+                    train loss:0.9001115848826194
+=== epoch:  17, train acc: 0.767, train 3 acc: 0.497, test acc: 0.724, test 3 acc: 0.420 ===
+                    train loss:0.8033537245128048
+=== epoch:  18, train acc: 0.754, train 3 acc: 0.460, test acc: 0.734, test 3 acc: 0.433 ===
+                    train loss:0.7959018525324403
+=== epoch:  19, train acc: 0.757, train 3 acc: 0.480, test acc: 0.724, test 3 acc: 0.430 ===
+                    train loss:0.7626342964045493
+=== epoch:  20, train acc: 0.776, train 3 acc: 0.513, test acc: 0.727, test 3 acc: 0.433 ===
+                    train loss:0.8598618472011831
+=== epoch:  21, train acc: 0.784, train 3 acc: 0.540, test acc: 0.723, test 3 acc: 0.420 ===
+                    train loss:0.7326616884394253
+=== epoch:  22, train acc: 0.784, train 3 acc: 0.547, test acc: 0.739, test 3 acc: 0.443 ===
+                    train loss:0.6804219287816513
+=== epoch:  23, train acc: 0.798, train 3 acc: 0.550, test acc: 0.740, test 3 acc: 0.447 ===
+                    train loss:0.7487788177378156
+=== epoch:  24, train acc: 0.784, train 3 acc: 0.550, test acc: 0.739, test 3 acc: 0.437 ===
+                    train loss:0.6692060372721441
+=== epoch:  25, train acc: 0.808, train 3 acc: 0.567, test acc: 0.741, test 3 acc: 0.463 ===
+                    train loss:0.6042578562261133
+=== epoch:  26, train acc: 0.811, train 3 acc: 0.563, test acc: 0.737, test 3 acc: 0.440 ===
+                    train loss:0.7076518892435083
+=== epoch:  27, train acc: 0.807, train 3 acc: 0.570, test acc: 0.750, test 3 acc: 0.453 ===
+                    train loss:0.6533427662297844
+=== epoch:  28, train acc: 0.809, train 3 acc: 0.570, test acc: 0.740, test 3 acc: 0.440 ===
+                    train loss:0.6104023847064534
+=== epoch:  29, train acc: 0.809, train 3 acc: 0.560, test acc: 0.760, test 3 acc: 0.470 ===
+                    train loss:0.6285139216597112
+=== epoch:  30, train acc: 0.810, train 3 acc: 0.567, test acc: 0.740, test 3 acc: 0.453 ===
+                    train loss:0.5944232704035665
+=== epoch:  31, train acc: 0.824, train 3 acc: 0.600, test acc: 0.748, test 3 acc: 0.460 ===
+                    train loss:0.5776948781008266
+=== epoch:  32, train acc: 0.830, train 3 acc: 0.613, test acc: 0.746, test 3 acc: 0.433 ===
+                    train loss:0.5487444229182625
+=== epoch:  33, train acc: 0.826, train 3 acc: 0.613, test acc: 0.749, test 3 acc: 0.463 ===
+                    train loss:0.63481989633078653
+=== epoch:  34, train acc: 0.830, train 3 acc: 0.597, test acc: 0.759, test 3 acc: 0.470 ===
+                    train loss:0.6423195010507603
+=== epoch:  35, train acc: 0.838, train 3 acc: 0.610, test acc: 0.742, test 3 acc: 0.440 ===
+                    train loss:0.49207787118984114
+=== epoch:  36, train acc: 0.838, train 3 acc: 0.637, test acc: 0.756, test 3 acc: 0.470 ===
+                    train loss:0.50722471731652164
+=== epoch:  37, train acc: 0.852, train 3 acc: 0.647, test acc: 0.759, test 3 acc: 0.467 ===
+                    train loss:0.56804148886585713
+=== epoch:  38, train acc: 0.832, train 3 acc: 0.613, test acc: 0.761, test 3 acc: 0.480 ===
+                    train loss:0.5470284863784155
+=== epoch:  39, train acc: 0.830, train 3 acc: 0.593, test acc: 0.757, test 3 acc: 0.453 ===
+                    train loss:0.52150894708632947
+=== epoch:  40, train acc: 0.827, train 3 acc: 0.600, test acc: 0.758, test 3 acc: 0.460 ===
+                    train loss:0.54592028534295496
+=== epoch:  41, train acc: 0.837, train 3 acc: 0.607, test acc: 0.750, test 3 acc: 0.453 ===
+                    train loss:0.56302597199218235
+=== epoch:  42, train acc: 0.847, train 3 acc: 0.640, test acc: 0.764, test 3 acc: 0.480 ===
+                    train loss:0.51744582985073387
+=== epoch:  43, train acc: 0.852, train 3 acc: 0.657, test acc: 0.769, test 3 acc: 0.487 ===
+                    train loss:0.48374845506026115
+=== epoch:  44, train acc: 0.849, train 3 acc: 0.650, test acc: 0.761, test 3 acc: 0.473 ===
+                    train loss:0.50339388797967627
+=== epoch:  45, train acc: 0.849, train 3 acc: 0.647, test acc: 0.759, test 3 acc: 0.473 ===
+                    train loss:0.48937273901577434
+=== epoch:  46, train acc: 0.849, train 3 acc: 0.643, test acc: 0.752, test 3 acc: 0.460 ===
+                    train loss:0.46357785974688196
+=== epoch:  47, train acc: 0.842, train 3 acc: 0.633, test acc: 0.754, test 3 acc: 0.450 ===
+                    train loss:0.46807361542616244
+=== epoch:  48, train acc: 0.857, train 3 acc: 0.653, test acc: 0.746, test 3 acc: 0.443 ===
+                    train loss:0.43168676011712276
+=== epoch:  49, train acc: 0.832, train 3 acc: 0.597, test acc: 0.750, test 3 acc: 0.460 ===
+                    train loss:0.43688415340757375
+=== epoch:  50, train acc: 0.854, train 3 acc: 0.657, test acc: 0.753, test 3 acc: 0.470 ===
+                    train loss:0.48030235579996874
+=== epoch:  51, train acc: 0.864, train 3 acc: 0.673, test acc: 0.763, test 3 acc: 0.473 ===
+                    train loss:0.49381259584547655
+=== epoch:  52, train acc: 0.848, train 3 acc: 0.623, test acc: 0.767, test 3 acc: 0.497 ===
+                    train loss:0.51228866375928947
+=== epoch:  53, train acc: 0.863, train 3 acc: 0.667, test acc: 0.758, test 3 acc: 0.473 ===
+                    train loss:0.48758806115137874
+=== epoch:  54, train acc: 0.854, train 3 acc: 0.670, test acc: 0.766, test 3 acc: 0.497 ===
+                    train loss:0.43807623714707435
+=== epoch:  55, train acc: 0.848, train 3 acc: 0.640, test acc: 0.764, test 3 acc: 0.473 ===
+                    train loss:0.46532722802896553
+=== epoch:  56, train acc: 0.854, train 3 acc: 0.637, test acc: 0.753, test 3 acc: 0.460 ===
+                    train loss:0.40640110063750645
+=== epoch:  57, train acc: 0.864, train 3 acc: 0.653, test acc: 0.766, test 3 acc: 0.493 ===
+                    train loss:0.43987752722745824
+=== epoch:  58, train acc: 0.856, train 3 acc: 0.643, test acc: 0.758, test 3 acc: 0.467 ===
+                    train loss:0.41555847834707893
+=== epoch:  59, train acc: 0.843, train 3 acc: 0.617, test acc: 0.767, test 3 acc: 0.480 ===
+                    train loss:0.39700816406243267
+=== epoch:  60, train acc: 0.861, train 3 acc: 0.670, test acc: 0.751, test 3 acc: 0.447 ===
+                    train loss:0.44156808043082957
+=== epoch:  61, train acc: 0.868, train 3 acc: 0.680, test acc: 0.761, test 3 acc: 0.470 ===
+                    train loss:0.41318082493294594
+=== epoch:  62, train acc: 0.881, train 3 acc: 0.703, test acc: 0.740, test 3 acc: 0.423 ===
+                    train loss:0.40190088132136163
+=== epoch:  63, train acc: 0.859, train 3 acc: 0.667, test acc: 0.747, test 3 acc: 0.463 ===
+                    train loss:0.40656125652129216
+=== epoch:  64, train acc: 0.861, train 3 acc: 0.653, test acc: 0.756, test 3 acc: 0.447 ===
+                    train loss:0.41406863088461926
+=== epoch:  65, train acc: 0.868, train 3 acc: 0.683, test acc: 0.763, test 3 acc: 0.473 ===
+                    train loss:0.45902626871097435
+=== epoch:  66, train acc: 0.872, train 3 acc: 0.690, test acc: 0.754, test 3 acc: 0.470 ===
+                    train loss:0.36523108156288003
+=== epoch:  67, train acc: 0.870, train 3 acc: 0.677, test acc: 0.746, test 3 acc: 0.430 ===
+                    train loss:0.41907056896076784
+=== epoch:  68, train acc: 0.866, train 3 acc: 0.670, test acc: 0.741, test 3 acc: 0.433 ===
+                    train loss:0.39435603155890686
+=== epoch:  69, train acc: 0.867, train 3 acc: 0.683, test acc: 0.746, test 3 acc: 0.453 ===
+                    train loss:0.38246199325707864
+=== epoch:  70, train acc: 0.870, train 3 acc: 0.690, test acc: 0.758, test 3 acc: 0.450 ===
+                    train loss:0.39907751284192555
+=== epoch:  71, train acc: 0.869, train 3 acc: 0.663, test acc: 0.763, test 3 acc: 0.480 ===
+                    train loss:0.35077144577283076
+=== epoch:  72, train acc: 0.873, train 3 acc: 0.697, test acc: 0.746, test 3 acc: 0.440 ===
+                    train loss:0.34252688547197824
+=== epoch:  73, train acc: 0.866, train 3 acc: 0.667, test acc: 0.749, test 3 acc: 0.447 ===
+                    train loss:0.33744063365343816
+=== epoch:  74, train acc: 0.874, train 3 acc: 0.687, test acc: 0.751, test 3 acc: 0.450 ===
+                    train loss:0.38916586496417443
+=== epoch:  75, train acc: 0.877, train 3 acc: 0.700, test acc: 0.739, test 3 acc: 0.433 ===
+                    train loss:0.36289299822304527
+=== epoch:  76, train acc: 0.881, train 3 acc: 0.703, test acc: 0.763, test 3 acc: 0.477 ===
+                    train loss:0.32968983293491244
+=== epoch:  77, train acc: 0.861, train 3 acc: 0.650, test acc: 0.750, test 3 acc: 0.440 ===
+                    train loss:0.35931732635993675
+=== epoch:  78, train acc: 0.874, train 3 acc: 0.690, test acc: 0.759, test 3 acc: 0.460 ===
+                    train loss:0.33118131360871417
+=== epoch:  79, train acc: 0.884, train 3 acc: 0.703, test acc: 0.751, test 3 acc: 0.460 ===
+                    train loss:0.35546184356935167
+=== epoch:  80, train acc: 0.889, train 3 acc: 0.727, test acc: 0.750, test 3 acc: 0.440 ===
+                    train loss:0.38162765390909794
+=== epoch:  81, train acc: 0.884, train 3 acc: 0.710, test acc: 0.759, test 3 acc: 0.473 ===
+                    train loss:0.37249702268841315
+=== epoch:  82, train acc: 0.898, train 3 acc: 0.740, test acc: 0.757, test 3 acc: 0.470 ===
+                    train loss:0.31358341968407194
+=== epoch:  83, train acc: 0.887, train 3 acc: 0.730, test acc: 0.741, test 3 acc: 0.437 ===
+                    train loss:0.30312273630310793
+=== epoch:  84, train acc: 0.886, train 3 acc: 0.727, test acc: 0.753, test 3 acc: 0.457 ===
+                    train loss:0.39721552804314347
+=== epoch:  85, train acc: 0.883, train 3 acc: 0.720, test acc: 0.741, test 3 acc: 0.437 ===
+                    train loss:0.32325625705549934
+=== epoch:  86, train acc: 0.874, train 3 acc: 0.687, test acc: 0.746, test 3 acc: 0.450 ===
+                    train loss:0.31739221066893014
+=== epoch:  87, train acc: 0.886, train 3 acc: 0.717, test acc: 0.750, test 3 acc: 0.467 ===
+                    train loss:0.36129105817665936
+=== epoch:  88, train acc: 0.889, train 3 acc: 0.733, test acc: 0.746, test 3 acc: 0.460 ===
+                    train loss:0.30810527073623723
+=== epoch:  89, train acc: 0.897, train 3 acc: 0.733, test acc: 0.741, test 3 acc: 0.423 ===
+                    train loss:0.41326828876121876
+=== epoch:  90, train acc: 0.872, train 3 acc: 0.690, test acc: 0.743, test 3 acc: 0.450 ===
+                    train loss:0.30822722792452345
+=== epoch:  91, train acc: 0.881, train 3 acc: 0.687, test acc: 0.740, test 3 acc: 0.440 ===
+                    train loss:0.35935999760318373
+=== epoch:  92, train acc: 0.886, train 3 acc: 0.710, test acc: 0.752, test 3 acc: 0.460 ===
+                    train loss:0.33989362154300877
+=== epoch:  93, train acc: 0.893, train 3 acc: 0.733, test acc: 0.750, test 3 acc: 0.463 ===
+                    train loss:0.29951128925782117
+=== epoch:  94, train acc: 0.897, train 3 acc: 0.737, test acc: 0.739, test 3 acc: 0.443 ===
+                    train loss:0.29022693236805617
+=== epoch:  95, train acc: 0.896, train 3 acc: 0.740, test acc: 0.744, test 3 acc: 0.437 ===
+                    train loss:0.28623526674667515
+=== epoch:  96, train acc: 0.897, train 3 acc: 0.753, test acc: 0.750, test 3 acc: 0.447 ===
+                    train loss:0.23368084154563317
+=== epoch:  97, train acc: 0.907, train 3 acc: 0.760, test acc: 0.741, test 3 acc: 0.440 ===
+                    train loss:0.29793857489850817
+=== epoch:  98, train acc: 0.904, train 3 acc: 0.763, test acc: 0.741, test 3 acc: 0.440 ===
+                    train loss:0.29065270841486407
+=== epoch:  99, train acc: 0.893, train 3 acc: 0.723, test acc: 0.740, test 3 acc: 0.427 ===
+                    train loss:0.30150117301396723
+=== epoch: 100, train acc: 0.893, train 3 acc: 0.740, test acc: 0.740, test 3 acc: 0.430 ===
+                    train loss:0.30268435344214765
+=== epoch: 101, train acc: 0.882, train 3 acc: 0.703, test acc: 0.741, test 3 acc: 0.433 ===
+                    train loss:0.32897756567437975
+=== epoch: 102, train acc: 0.907, train 3 acc: 0.770, test acc: 0.736, test 3 acc: 0.443 ===
+                    train loss:0.27540845999305264
+=== epoch: 103, train acc: 0.894, train 3 acc: 0.733, test acc: 0.744, test 3 acc: 0.453 ===
+                    train loss:0.31151240445658767
+=== epoch: 104, train acc: 0.897, train 3 acc: 0.737, test acc: 0.737, test 3 acc: 0.423 ===
+                    train loss:0.24854463775530622
+=== epoch: 105, train acc: 0.904, train 3 acc: 0.753, test acc: 0.740, test 3 acc: 0.437 ===
+                    train loss:0.29417825145989288
+=== epoch: 106, train acc: 0.886, train 3 acc: 0.703, test acc: 0.743, test 3 acc: 0.440 ===
+                    train loss:0.27627614246550897
+=== epoch: 107, train acc: 0.900, train 3 acc: 0.747, test acc: 0.744, test 3 acc: 0.430 ===
+                    train loss:0.25555095767474087
+=== epoch: 108, train acc: 0.906, train 3 acc: 0.753, test acc: 0.746, test 3 acc: 0.430 ===
+                    train loss:0.30718499244197206
+=== epoch: 109, train acc: 0.897, train 3 acc: 0.743, test acc: 0.743, test 3 acc: 0.437 ===
+                    train loss:0.28377690739583157
+=== epoch: 110, train acc: 0.900, train 3 acc: 0.750, test acc: 0.742, test 3 acc: 0.433 ===
+                    train loss:0.26715492243638133
+=== epoch: 111, train acc: 0.899, train 3 acc: 0.737, test acc: 0.733, test 3 acc: 0.403 ===
+                    train loss:0.24258266798204595
+=== epoch: 112, train acc: 0.906, train 3 acc: 0.760, test acc: 0.731, test 3 acc: 0.417 ===
+                    train loss:0.24787627341004484
+=== epoch: 113, train acc: 0.893, train 3 acc: 0.730, test acc: 0.743, test 3 acc: 0.450 ===
+                    train loss:0.26354214826482355
+=== epoch: 114, train acc: 0.904, train 3 acc: 0.763, test acc: 0.733, test 3 acc: 0.433 ===
+                    train loss:0.31897808160672425
+=== epoch: 115, train acc: 0.889, train 3 acc: 0.710, test acc: 0.744, test 3 acc: 0.457 ===
+                    train loss:0.27271519517122036
+=== epoch: 116, train acc: 0.900, train 3 acc: 0.753, test acc: 0.733, test 3 acc: 0.433 ===
+                    train loss:0.21270716490700708
+=== epoch: 117, train acc: 0.903, train 3 acc: 0.763, test acc: 0.748, test 3 acc: 0.457 ===
+                    train loss:0.26255625031523692
+=== epoch: 118, train acc: 0.913, train 3 acc: 0.777, test acc: 0.733, test 3 acc: 0.430 ===
+                    train loss:0.26801034608240515
+=== epoch: 119, train acc: 0.897, train 3 acc: 0.733, test acc: 0.741, test 3 acc: 0.450 ===
+                    train loss:0.25970355924757447
+=== epoch: 120, train acc: 0.911, train 3 acc: 0.773, test acc: 0.736, test 3 acc: 0.420 ===
+                    train loss:0.23915153718439294
+=== epoch: 121, train acc: 0.918, train 3 acc: 0.783, test acc: 0.739, test 3 acc: 0.450 ===
+                    train loss:0.20475220871586071
+=== epoch: 122, train acc: 0.911, train 3 acc: 0.773, test acc: 0.734, test 3 acc: 0.443 ===
+                    train loss:0.23793147905296785
+=== epoch: 123, train acc: 0.914, train 3 acc: 0.787, test acc: 0.741, test 3 acc: 0.447 ===
+                    train loss:0.28315242995356685
+=== epoch: 124, train acc: 0.916, train 3 acc: 0.777, test acc: 0.741, test 3 acc: 0.443 ===
+                    train loss:0.25046571816244084
+=== epoch: 125, train acc: 0.911, train 3 acc: 0.777, test acc: 0.732, test 3 acc: 0.443 ===
+                    train loss:0.20256075747008223
+=== epoch: 126, train acc: 0.919, train 3 acc: 0.787, test acc: 0.740, test 3 acc: 0.433 ===
+                    train loss:0.28742681448808144
+=== epoch: 127, train acc: 0.902, train 3 acc: 0.760, test acc: 0.731, test 3 acc: 0.430 ===
+                    train loss:0.30333311935084397
+=== epoch: 128, train acc: 0.914, train 3 acc: 0.773, test acc: 0.737, test 3 acc: 0.447 ===
+                    train loss:0.21880175453964136
+=== epoch: 129, train acc: 0.912, train 3 acc: 0.790, test acc: 0.740, test 3 acc: 0.453 ===
+                    train loss:0.20434137999604812
+=== epoch: 130, train acc: 0.911, train 3 acc: 0.773, test acc: 0.729, test 3 acc: 0.423 ===
+                    train loss:0.22213104091789085
+=== epoch: 131, train acc: 0.919, train 3 acc: 0.800, test acc: 0.723, test 3 acc: 0.397 ===
+                    train loss:0.25679689601180156
+=== epoch: 132, train acc: 0.914, train 3 acc: 0.787, test acc: 0.731, test 3 acc: 0.423 ===
+                    train loss:0.25171612462334986
+=== epoch: 133, train acc: 0.918, train 3 acc: 0.793, test acc: 0.731, test 3 acc: 0.427 ===
+                    train loss:0.23555281832143207
+=== epoch: 134, train acc: 0.912, train 3 acc: 0.773, test acc: 0.728, test 3 acc: 0.430 ===
+                    train loss:0.26995784242505555
+=== epoch: 135, train acc: 0.907, train 3 acc: 0.760, test acc: 0.736, test 3 acc: 0.433 ===
+                    train loss:0.25757876864383376
+=== epoch: 136, train acc: 0.893, train 3 acc: 0.733, test acc: 0.733, test 3 acc: 0.420 ===
+                    train loss:0.25356878396715084
+=== epoch: 137, train acc: 0.906, train 3 acc: 0.747, test acc: 0.734, test 3 acc: 0.423 ===
+                    train loss:0.25075158431244167
+=== epoch: 138, train acc: 0.932, train 3 acc: 0.827, test acc: 0.750, test 3 acc: 0.457 ===
+                    train loss:0.22740355807836896
+=== epoch: 139, train acc: 0.920, train 3 acc: 0.793, test acc: 0.739, test 3 acc: 0.443 ===
+                    train loss:0.26731262137666123
+=== epoch: 140, train acc: 0.910, train 3 acc: 0.773, test acc: 0.742, test 3 acc: 0.440 ===
+                    train loss:0.23365995861955677
+=== epoch: 141, train acc: 0.900, train 3 acc: 0.747, test acc: 0.738, test 3 acc: 0.423 ===
+                    train loss:0.23036876583090057
+=== epoch: 142, train acc: 0.911, train 3 acc: 0.767, test acc: 0.731, test 3 acc: 0.427 ===
+                    train loss:0.17577935846317679
+=== epoch: 143, train acc: 0.909, train 3 acc: 0.773, test acc: 0.722, test 3 acc: 0.407 ===
+                    train loss:0.21578624871914768
+=== epoch: 144, train acc: 0.918, train 3 acc: 0.800, test acc: 0.740, test 3 acc: 0.447 ===
+                    train loss:0.19972909907230693
+=== epoch: 145, train acc: 0.927, train 3 acc: 0.817, test acc: 0.728, test 3 acc: 0.417 ===
+                    train loss:0.22491169586510257
+=== epoch: 146, train acc: 0.916, train 3 acc: 0.777, test acc: 0.738, test 3 acc: 0.433 ===
+                    train loss:0.19379656595659415
+=== epoch: 147, train acc: 0.934, train 3 acc: 0.830, test acc: 0.740, test 3 acc: 0.437 ===
+                    train loss:0.20951837559839544
+=== epoch: 148, train acc: 0.929, train 3 acc: 0.810, test acc: 0.742, test 3 acc: 0.443 ===
+                    train loss:0.21255649853520532
+=== epoch: 149, train acc: 0.929, train 3 acc: 0.813, test acc: 0.733, test 3 acc: 0.447 ===
+                    train loss:0.25049754396423046
+=== epoch: 150, train acc: 0.926, train 3 acc: 0.813, test acc: 0.740, test 3 acc: 0.447 ===
+                    train loss:0.22215149126650842
+=== epoch: 151, train acc: 0.924, train 3 acc: 0.797, test acc: 0.723, test 3 acc: 0.417 ===
+                    train loss:0.21501887319185893
+=== epoch: 152, train acc: 0.911, train 3 acc: 0.780, test acc: 0.729, test 3 acc: 0.423 ===
+                    train loss:0.20018913117243003
+=== epoch: 153, train acc: 0.920, train 3 acc: 0.797, test acc: 0.727, test 3 acc: 0.407 ===
+                    train loss:0.18472472858494995
+=== epoch: 154, train acc: 0.929, train 3 acc: 0.813, test acc: 0.732, test 3 acc: 0.423 ===
+                    train loss:0.19447608641260795
+=== epoch: 155, train acc: 0.923, train 3 acc: 0.800, test acc: 0.746, test 3 acc: 0.453 ===
+                    train loss:0.24426860923669264
+=== epoch: 156, train acc: 0.918, train 3 acc: 0.783, test acc: 0.739, test 3 acc: 0.440 ===
+                    train loss:0.21968082219337284
+=== epoch: 157, train acc: 0.924, train 3 acc: 0.797, test acc: 0.737, test 3 acc: 0.427 ===
+                    train loss:0.18540645028744833
+=== epoch: 158, train acc: 0.938, train 3 acc: 0.833, test acc: 0.729, test 3 acc: 0.423 ===
+                    train loss:0.19549072369578196
+=== epoch: 159, train acc: 0.931, train 3 acc: 0.817, test acc: 0.736, test 3 acc: 0.440 ===
+                    train loss:0.21799691681781598
+=== epoch: 160, train acc: 0.927, train 3 acc: 0.813, test acc: 0.729, test 3 acc: 0.440 ===
+                    train loss:0.18043847241459732
+=== epoch: 161, train acc: 0.933, train 3 acc: 0.827, test acc: 0.736, test 3 acc: 0.440 ===
+                    train loss:0.21051501280550974
+=== epoch: 162, train acc: 0.918, train 3 acc: 0.793, test acc: 0.731, test 3 acc: 0.427 ===
+                    train loss:0.20903140656570348
+=== epoch: 163, train acc: 0.927, train 3 acc: 0.803, test acc: 0.727, test 3 acc: 0.413 ===
+                    train loss:0.19873991570569413
+=== epoch: 164, train acc: 0.933, train 3 acc: 0.837, test acc: 0.736, test 3 acc: 0.443 ===
+                    train loss:0.18554744268238937
+=== epoch: 165, train acc: 0.931, train 3 acc: 0.817, test acc: 0.738, test 3 acc: 0.453 ===
+                    train loss:0.19312789484016446
+=== epoch: 166, train acc: 0.938, train 3 acc: 0.840, test acc: 0.731, test 3 acc: 0.423 ===
+                    train loss:0.19983625382467285
+=== epoch: 167, train acc: 0.929, train 3 acc: 0.820, test acc: 0.730, test 3 acc: 0.433 ===
+                    train loss:0.17648697572916885
+=== epoch: 168, train acc: 0.918, train 3 acc: 0.787, test acc: 0.737, test 3 acc: 0.433 ===
+                    train loss:0.21023179651593257
+=== epoch: 169, train acc: 0.920, train 3 acc: 0.787, test acc: 0.734, test 3 acc: 0.443 ===
+                    train loss:0.20083956171845344
+=== epoch: 170, train acc: 0.921, train 3 acc: 0.797, test acc: 0.738, test 3 acc: 0.430 ===
+                    train loss:0.20973766267631022
+=== epoch: 171, train acc: 0.937, train 3 acc: 0.840, test acc: 0.741, test 3 acc: 0.460 ===
+                    train loss:0.20469929614879032
+=== epoch: 172, train acc: 0.931, train 3 acc: 0.823, test acc: 0.740, test 3 acc: 0.430 ===
+                    train loss:0.21104322067102632
+=== epoch: 173, train acc: 0.939, train 3 acc: 0.840, test acc: 0.728, test 3 acc: 0.423 ===
+                    train loss:0.14285952275036998
+=== epoch: 174, train acc: 0.924, train 3 acc: 0.797, test acc: 0.737, test 3 acc: 0.443 ===
+                    train loss:0.20024345138459954
+=== epoch: 175, train acc: 0.922, train 3 acc: 0.790, test acc: 0.726, test 3 acc: 0.410 ===
+                    train loss:0.24592796756521675
+=== epoch: 176, train acc: 0.924, train 3 acc: 0.803, test acc: 0.734, test 3 acc: 0.433 ===
+                    train loss:0.18411545875783936
+=== epoch: 177, train acc: 0.941, train 3 acc: 0.840, test acc: 0.730, test 3 acc: 0.427 ===
+                    train loss:0.17184884260968447
+=== epoch: 178, train acc: 0.931, train 3 acc: 0.807, test acc: 0.734, test 3 acc: 0.433 ===
+                    train loss:0.18345940270964797
+=== epoch: 179, train acc: 0.924, train 3 acc: 0.800, test acc: 0.743, test 3 acc: 0.450 ===
+                    train loss:0.14671710715920847
+=== epoch: 180, train acc: 0.943, train 3 acc: 0.850, test acc: 0.731, test 3 acc: 0.417 ===
+                    train loss:0.17501828896923294
+=== epoch: 181, train acc: 0.933, train 3 acc: 0.813, test acc: 0.747, test 3 acc: 0.457 ===
+                    train loss:0.18252009428052632
+=== epoch: 182, train acc: 0.942, train 3 acc: 0.840, test acc: 0.740, test 3 acc: 0.460 ===
+                    train loss:0.13067539722836907
+=== epoch: 183, train acc: 0.948, train 3 acc: 0.853, test acc: 0.733, test 3 acc: 0.423 ===
+                    train loss:0.15397917510347078
+=== epoch: 184, train acc: 0.939, train 3 acc: 0.853, test acc: 0.740, test 3 acc: 0.440 ===
+                    train loss:0.14924621697480575
+=== epoch: 185, train acc: 0.931, train 3 acc: 0.837, test acc: 0.737, test 3 acc: 0.447 ===
+                    train loss:0.17290636638848927
+=== epoch: 186, train acc: 0.930, train 3 acc: 0.823, test acc: 0.728, test 3 acc: 0.410 ===
+                    train loss:0.15279733586710215
+=== epoch: 187, train acc: 0.933, train 3 acc: 0.833, test acc: 0.730, test 3 acc: 0.417 ===
+                    train loss:0.16625159322666877
+=== epoch: 188, train acc: 0.938, train 3 acc: 0.830, test acc: 0.738, test 3 acc: 0.460 ===
+                    train loss:0.15980889150684024
+=== epoch: 189, train acc: 0.928, train 3 acc: 0.807, test acc: 0.724, test 3 acc: 0.423 ===
+                    train loss:0.12041558715842772
+=== epoch: 190, train acc: 0.932, train 3 acc: 0.820, test acc: 0.728, test 3 acc: 0.420 ===
+                    train loss:0.15990625865464453
+=== epoch: 191, train acc: 0.932, train 3 acc: 0.813, test acc: 0.728, test 3 acc: 0.410 ===
+                    train loss:0.16220511178310185
+=== epoch: 192, train acc: 0.921, train 3 acc: 0.780, test acc: 0.736, test 3 acc: 0.453 ===
+                    train loss:0.18780801578600695
+=== epoch: 193, train acc: 0.928, train 3 acc: 0.813, test acc: 0.740, test 3 acc: 0.433 ===
+                    train loss:0.16134238022010292
+=== epoch: 194, train acc: 0.934, train 3 acc: 0.833, test acc: 0.730, test 3 acc: 0.427 ===
+                    train loss:0.17922631637636233
+=== epoch: 195, train acc: 0.929, train 3 acc: 0.807, test acc: 0.733, test 3 acc: 0.437 ===
+                    train loss:0.13225148979675144
+=== epoch: 196, train acc: 0.947, train 3 acc: 0.867, test acc: 0.742, test 3 acc: 0.447 ===
+                    train loss:0.10407750461580594
+=== epoch: 197, train acc: 0.946, train 3 acc: 0.857, test acc: 0.727, test 3 acc: 0.420 ===
+                    train loss:0.13345098095876065
+=== epoch: 198, train acc: 0.941, train 3 acc: 0.837, test acc: 0.733, test 3 acc: 0.433 ===
+                    train loss:0.16139120210089633
+=== epoch: 199, train acc: 0.934, train 3 acc: 0.823, test acc: 0.722, test 3 acc: 0.403 ===
+                    train loss:0.16745686882596475
+=== epoch: 200, train acc: 0.943, train 3 acc: 0.840, test acc: 0.729, test 3 acc: 0.420 ===
+                    train loss:0.16709916409871842
+
+=============== Final Test Accuracy ===============
+1 char test acc: 0.7380555555555556
+3 char test acc: 0.4325

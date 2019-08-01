@@ -23,8 +23,8 @@ num_train = 600
 batch_size = 15
 img_size = 32
 
-params_name = "params_3_600_15_1564606911.pkl"
-isTrain = True
+params_name = "params_200_12000_900_0123.pkl"
+isTrain = False
 myalg = MyAlgorithm(traindata, valdata, testdata, max_epochs, num_train, batch_size, img_size, params_name)
 
 # Train model

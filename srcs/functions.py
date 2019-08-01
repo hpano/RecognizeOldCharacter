@@ -1,6 +1,8 @@
 import os
 from numba import jit
 import numpy as np
+import pandas as pd
+from pathlib import Path
 from PIL import Image
 
 
@@ -185,6 +187,39 @@ def div_img(img, filter, img_size):
     img = (img > 70) * 255
 
     return img
+
+
+def calc_code_reliability():
+    file_name = "code_reliability"
+    if not os.path.exists(file_name + ".npy"):
+        code_reliability = np.zeros((48, 48), int)
+
+        fnm = Path("./dataset/train/annotations.csv")
+        assert fnm.exists()
+        df = pd.read_csv(fnm)
+        df_len = len(df)
+        for idx in range(df_len):
+            msg = "loading code_reli"
+            print_progress_bar(msg, idx, df_len)
+
+            unicodes = list(df.iloc[idx, 1:4])
+            code0 = code2index(unicodes[0])
+            code1 = code2index(unicodes[1])
+            code2 = code2index(unicodes[2])
+            code_reliability[code0][code1] += 1
+            code_reliability[code1][code2] += 1
+        print_progress_bar(msg, idx + 1, df_len)
+
+        # TF-IDFによる単語の重要度計算
+        d_sum = np.sum(code_reliability, axis=1, keepdims=True)
+        tf = code_reliability / d_sum
+        td_num = np.count_nonzero(code_reliability > 0, axis=0) + 1
+        idf = np.log2(48 / td_num)
+        tfidf = tf * idf
+        # predict値と合わせるための補正
+        code_reliability = tfidf * 3000
+
+        np.save(file_name, code_reliability)
 
 
 def print_progress_bar(msg, current_progress, total_size):
