@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+くずし字認識チャレンジ
+以下コンテストの内容
+
 # PRMU challenge on old Japanese character recognition, 2019
 This project provides source codes and dataset for recognizing successive three characters in old Japanese documents, and output unicodes of a set of three characters.
 
@@ -53,4 +55,3 @@ E-Mail: prmu-fy2019alcon@mail.ieice.org
 =======
 # RecognizeOldCharacter
 23th PRMU Algorithm Contest - Recognize 3 consecutive old Japanese characters
->>>>>>> origin/master
